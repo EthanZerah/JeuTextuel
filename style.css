@@ -34,7 +34,7 @@ input {
     outline: none;
 }
 
-.button-group .button1 {
+.button-group .faible {
     display: inline-block;
     padding: 5px 15px;
     font-size: 15px;
@@ -49,17 +49,17 @@ input {
     box-shadow: 0 9px rgb(84, 0, 0);
 }
   
-.button-group .button1:hover {
+.button-group .faible:hover {
     background-color: rgb(114, 0, 0);
 }
 
-.button-group .button1:active {
+.button-group .faible:active {
     background-color: rgb(114, 0, 0);
     box-shadow: 0 5px rgb(73, 0, 0);
     transform: translateY(4px);
 }
 
-.button-group .button2 {
+.button-group .forte {
     display: inline-block;
     padding: 5px 15px;
     font-size: 15px;
@@ -74,17 +74,17 @@ input {
     box-shadow: 0 9px rgb(0, 69, 0);
 }
   
-.button-group .button2:hover {
+.button-group .forte:hover {
     background-color: rgb(0, 99, 0);
 }
 
-.button-group .button2:active {
+.button-group .forte:active {
     background-color: rgb(0, 99, 0);
     box-shadow: 0 5px rgb(0, 58, 0);
     transform: translateY(4px);
 }
 
-.button-group .button3 {
+.button-group .magie {
     display: inline-block;
     padding: 5px 15px;
     font-size: 15px;
@@ -99,17 +99,17 @@ input {
     box-shadow: 0 9px rgb(115, 111, 0);
 }
   
-.button-group .button3:hover {
+.button-group .magie:hover {
     background-color: rgb(135, 131, 0);
 }
 
-.button-group .button3:active {
+.button-group .magie:active {
     background-color: rgb(135, 131, 0);
     box-shadow: 0 5px rgb(84, 80, 0);
     transform: translateY(4px);
 }
 
-.button-group .button4 {
+.button-group .fuir {
     display: inline-block;
     padding: 5px 15px;
     font-size: 15px;
@@ -124,15 +124,39 @@ input {
     box-shadow: 0 9px rgb(0, 0, 84);
 }
   
-.button-group .button4:hover {
+.button-group .fuir:hover {
     background-color: rgb(0, 0, 114);
 }
 
-.button-group .button4:active {
+.button-group .fuir:active {
     background-color: rgb(0, 0, 114);
     box-shadow: 0 5px rgb(0, 0, 73);
     transform: translateY(4px);
 }
+
+.button-group .button {
+    display: inline-block;
+    padding: 5px 15px;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: lightgrey;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+  
+  .button-group .button:hover {background-color: rgb(190, 190, 190)}
+  
+  .button-group .button:active {
+    background-color: darkgrey;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
 
 #texte{
     height : 87% ;

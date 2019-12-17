@@ -1092,14 +1092,7 @@ function leveling(){
 }
 function combat() {
     Perso.newPV= Perso.PVMax;
-    document.getElementById('choix1').innerHTML = 'Attaque Faible';
-    document.getElementById('choix2').innerHTML = 'Attaque Forte';
-    document.getElementById('choix3').innerHTML = 'Magie';
-    document.getElementById('choix4').innerHTML = 'Fuir';
-    document.getElementById('choix1').addEventListener('click', faible);
-    document.getElementById('choix2').addEventListener('click', forte);
-    document.getElementById('choix3').addEventListener('click', magie);
-    document.getElementById('choix4').addEventListener('click', fuite);
+    document.getElementById('button-group').innerHTML = '<button class=faible id=choix1 onclick=faible() >Attaque Faible</button><button class=forte id=choix2 onclick=forte()>Attaque Forte</button><button class=magie id=choix3 onclick=magie() >Magie</button><button class=fuir id=choix4 onclick=fuite() >Fuir</button>';
 
     let randMob = Math.floor(Math.random() * Math.floor(3));
 
@@ -1159,14 +1152,7 @@ function combat() {
 }
 
 function retour() {
-    document.getElementById('choix1').innerHTML = '';
-    document.getElementById('choix2').innerHTML = '';
-    document.getElementById('choix3').innerHTML = '';
-    document.getElementById('choix4').innerHTML = '';
-    document.getElementById('choix1').removeEventListener('click', faible);
-    document.getElementById('choix2').removeEventListener('click', forte);
-    document.getElementById('choix3').removeEventListener('click', magie);
-    document.getElementById('choix4').removeEventListener('click', fuite);
+    document.getElementById('button-group').innerHTML = '';
     continuer();   
 }
 function chapitres() {
@@ -1180,7 +1166,7 @@ function commandes() {
 function continuer(){
     fight = false;
     if(page===0){
-        tes = "<h1>Bienvenue héro !</h1><h3>Rapide tutoriel </h3><p>Chaque choix déterminant sera effectué grâce aux boutons situés dans la partie inférieure. Un bouton vide ne fera rien.<br>Il y a également une barre en dessous pour rentrer du texte et lancer certaines commandes. Les commandes seront désactivées lors des combats, des choix ou dans des moments où il faut rentrer du texte.<br>Pour connaitre la liste des commandes, tape la commande 'commandes' et appuie sur la touche entrée.<br> Il y a plusieurs fins disponibles en fonction de tes choix au cours de la partie, à toi de toutes les découvrir !<br><br>Pour continuer appuie sur la flèche de droite et sur la flèche de gauche pour revenir en arrière.</p>";
+        tes = "<h1>Bienvenue héro !</h1><h3>Rapide tutoriel </h3><p>Il y a une barre en bas pour effectuer les choix et lancer certaines commandes. Les commandes seront désactivées lors des combats, des choix ou dans des moments où il faut rentrer du texte.<br>Pour connaitre la liste des commandes, tape la commande 'commandes' et appuie sur la touche entrée.<br> Il y a plusieurs fins disponibles en fonction de tes choix au cours de la partie, à toi de toutes les découvrir !<br><br>Pour continuer appuie sur la flèche de droite et sur la flèche de gauche pour revenir en arrière.</p>";
         document.getElementById('texte').innerHTML = tes;
     }
     if(page===1){
@@ -1219,8 +1205,7 @@ function commande()
         }
         if (page === 2){
             let classe = document.getElementById('commandes').value;
-            Perso.newClasse=classe;
-            if (Perso.Classe === 'Guerrier' || Perso.Classe === 'guerrier') {
+            if (classe === 'Guerrier' || classe === 'guerrier') {
                 Perso.newClasse = "Guerrier";
                 Perso.newPvMax = 20;
                 Perso.newPV = 20;
@@ -1228,7 +1213,7 @@ function commande()
                 Perso.newForce = 3;
                 Perso.newMagie = 1;
             }
-            else if (Perso.Classe === 'Mage' || Perso.Classe === 'mage') {
+            else if (classe === 'Mage' || classe === 'mage') {
                 Perso.newClasse = "Mage";
                 Perso.newPvMax = 25;
                 Perso.newPV = 25;
@@ -1236,7 +1221,7 @@ function commande()
                 Perso.newForce = 2;
                 Perso.newMagie = 4;
             }
-            else if (Perso.Classe === 'Voleur' || Perso.Classe === 'voleur') {
+            else if (classe === 'Voleur' || classe === 'voleur') {
                 Perso.newClasse = "Voleur";
                 Perso.newPvMax = 15;
                 Perso.newPV = 15;
@@ -1250,7 +1235,7 @@ function commande()
                 Perso.newPV = 10;
                 Perso.newDefense = 1;
                 Perso.newForce = 1;
-                Perso.newMagie = 0;
+                Perso.newMagie = 1;
             }
         }
     }
