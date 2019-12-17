@@ -1,3 +1,18 @@
+window.addEventListener('keydown', function (e) {
+    if (e.keyCode == 39) {
+        if (page<70){
+            page++;
+            continuer();
+        }
+    }
+    else if (e.keyCode == 37) {
+        if (page>0){
+            page--;
+            continuer();
+        }    
+    }
+  });
+
 let page = 0;
 let choix = 0.0;
 let tes ='';
@@ -51,7 +66,6 @@ class Hero {
         return this.Nom + '  Niveau : ' + this.Niveau + '<br>' + this.PV + '/' + this.PVMax;
     }
 }
-
 class Mob {
     constructor(Nom, PVMax, PV, Defense, Force, Magie, XP) {
     this.Nom = Nom;
@@ -86,7 +100,7 @@ class Mob {
     }
 }
 
-const Perso = new Hero('???','',10,10,0,10,0,0,1);
+const Perso = new Hero('???','',10,10,6,5,1,0,1);
 
 /*Mobs niveau 1 à 3 */
 const Slime = new Mob('Slime',10,10,1,3,1,10);
@@ -106,33 +120,29 @@ const Ange = new Mob('Ange Déchu',15,15,3,2,0,43);
 const Demon = new Mob('Démon Infernal',13,13,1,1,3,40);
 
 /*Boss */
-const Dieu = new Mob('Dieu',100,100,10,10,10,10);
-const Diable = new Mob('Diable',200,200,20,20,20,10);
-const Dragon = new Mob('Dragon',200,200,25,25,25,10);
-
-function commandes() {
-    tes = '<h1>Liste des commandes</1><h3>Combat</h3><p>Lance un combat aléatoire</p><h3></h3><h3></h3><h3></h3><p>Entrer \'retour\' pour revenir à l\'histoire.</p>'
-    document.getElementById('texte').innerHTML = tes;
-}
+const Dieu = new Mob('Dieu',100,100,10,10,10,0);
+const Diable = new Mob('Diable',200,200,20,20,20,0);
+const Dragon = new Mob('Dragon',200,200,25,25,25,0);
+const Double = new Mob('Toi',300,300,30,30,30,0);
 
 function attaqueMob(){
     if (monstre == 1){
         let randAttaque = Math.floor(Math.random() * Math.floor(3));
-        if (randAttaque == 0) {
+        if (randAttaque == 0 && (- (Fantome.Force/2) + (Perso.Defense/2))<0) {
             Perso.newPV = Perso.PV - (Fantome.Force/2) + (Perso.Defense/2);
         }
-        else if (randAttaque == 1) {
+        else if (randAttaque == 1 && (- (Fantome.Force*2) + (Perso.Defense/2))<0) {
             let attaqueforte = Math.floor(Math.random() * Math.floor(100));
             if (attaqueforte <75){
-                Perso.newPV = Perso.PV - Fantome.Force + (Perso.Defense/2);
+                Perso.newPV = Perso.PV - Fantome.Force*2 + (Perso.Defense/2);
             }
             else { 
             }
         }
-        else if (randAttaque == 2){
+        else if (randAttaque == 2 && (- (Fantome.Magie*3) + (Perso.Defense/2))<0){
             let magie = Math.floor(Math.random() * Math.floor(100));
             if (magie <50){
-                Perso.newPV = Perso.PV - Fantome.Magie + (Perso.Defense/3);
+                Perso.newPV = Perso.PV - Fantome.Magie*3 + (Perso.Defense/2);
             }
             else{
             }
@@ -140,21 +150,21 @@ function attaqueMob(){
     }
     else if (monstre == 2){
         let randAttaque = Math.floor(Math.random() * Math.floor(3));
-        if (randAttaque == 0) {
+        if (randAttaque == 0 && (- (Slime.Force/2) + (Perso.Defense/2))<0) {
             Perso.newPV = Perso.PV - (Slime.Force/2) + (Perso.Defense/2);
         }
-        else if (randAttaque == 1) {
+        else if (randAttaque == 1&& (- (Slime.Force*2) + (Perso.Defense/2))<0) {
             let attaqueforte = Math.floor(Math.random() * Math.floor(100));
             if (attaqueforte <75){
-                Perso.newPV = Perso.PV - Slime.Force + (Perso.Defense/2);
+                Perso.newPV = Perso.PV - Slime.Force*2 + (Perso.Defense/2);
             }
             else { 
             }
         }
-        else if (randAttaque == 2){
+        else if (randAttaque == 2&& (- (Slime.Magie*3) + (Perso.Defense/2))<0){
             let magie = Math.floor(Math.random() * Math.floor(100));
             if (magie <50){
-                Perso.newPV = Perso.PV - Slime.Magie + (Perso.Defense/3);
+                Perso.newPV = Perso.PV - Slime.Magie*3 + (Perso.Defense/2);
             }
             else{
             }
@@ -162,31 +172,164 @@ function attaqueMob(){
     }
     else if (monstre == 3){
         let randAttaque = Math.floor(Math.random() * Math.floor(3));
-        if (randAttaque == 0) {
+        if (randAttaque == 0 && (- (Rat.Force/2) + (Perso.Defense/2))<0) {
             Perso.newPV = Perso.PV - (Rat.Force/2) + (Perso.Defense/2);
         }
-        else if (randAttaque == 1) {
+        else if (randAttaque == 1&& (- (Rat.Force*2) + (Perso.Defense/2))<0) {
             let attaqueforte = Math.floor(Math.random() * Math.floor(100));
             if (attaqueforte <75){
-                Perso.newPV = Perso.PV - Rat.Force + (Perso.Defense/2);
+                Perso.newPV = Perso.PV - Rat.Force*2 + (Perso.Defense/2);
             }
             else { 
             }
         }
-        else if (randAttaque == 2){
+        else if (randAttaque == 2 && (- (Rat.Magie*3) + (Perso.Defense/2))<0){
             let magie = Math.floor(Math.random() * Math.floor(100));
             if (magie <50){
-                Perso.newPV = Perso.PV - Rat.Magie + (Perso.Defense/3);
+                Perso.newPV = Perso.PV - Rat.Magie*3 + (Perso.Defense/2);
+            }
+            else{
+            }
+        }
+    }
+    else if (monstre == 4){
+        let randAttaque = Math.floor(Math.random() * Math.floor(3));
+        if (randAttaque == 0 && (- (Loup.Force/2) + (Perso.Defense/2))<0) {
+            Perso.newPV = Perso.PV - (Loup.Force/2) + (Perso.Defense/2);
+        }
+        else if (randAttaque == 1 && (- (Loup.Force*2) + (Perso.Defense/2))<0) {
+            let attaqueforte = Math.floor(Math.random() * Math.floor(100));
+            if (attaqueforte <75){
+                Perso.newPV = Perso.PV - Loup.Force*2 + (Perso.Defense/2);
+            }
+            else { 
+            }
+        }
+        else if (randAttaque == 2 && (- (Loup.Magie*3) + (Perso.Defense/2))<0){
+            let magie = Math.floor(Math.random() * Math.floor(100));
+            if (magie <50){
+                Perso.newPV = Perso.PV - Loup.Magie*3 + (Perso.Defense/2);
+            }
+            else{
+            }
+        }
+    }
+    else if (monstre == 5){
+        let randAttaque = Math.floor(Math.random() * Math.floor(3));
+        if (randAttaque == 0 && (- (Orc.Force/2) + (Perso.Defense/2))<0) {
+            Perso.newPV = Perso.PV - (Orc.Force/2) + (Perso.Defense/2);
+        }
+        else if (randAttaque == 1 && (- (Orc.Force*2) + (Perso.Defense/2))<0) {
+            let attaqueforte = Math.floor(Math.random() * Math.floor(100));
+            if (attaqueforte <75){
+                Perso.newPV = Perso.PV - Orc.Force*2 + (Perso.Defense/2);
+            }
+            else { 
+            }
+        }
+        else if (randAttaque == 2 && (- (Orc.Magie*3) + (Perso.Defense/2))<0){
+            let magie = Math.floor(Math.random() * Math.floor(100));
+            if (magie <50){
+                Perso.newPV = Perso.PV - Orc.Magie*3 + (Perso.Defense/2);
+            }
+            else{
+            }
+        }
+    }
+    else if (monstre == 6){
+        let randAttaque = Math.floor(Math.random() * Math.floor(3));
+        if (randAttaque == 0 && (- (Robot.Force/2) + (Perso.Defense/2))<0) {
+            Perso.newPV = Perso.PV - (Robot.Force/2) + (Perso.Defense/2);
+        }
+        else if (randAttaque == 1 && (- (Robot.Force*2) + (Perso.Defense/2))<0) {
+            let attaqueforte = Math.floor(Math.random() * Math.floor(100));
+            if (attaqueforte <75){
+                Perso.newPV = Perso.PV - Robot.Force*2 + (Perso.Defense/2);
+            }
+            else { 
+            }
+        }
+        else if (randAttaque == 2 && (- (Robot.Magie*3) + (Perso.Defense/2))<0){
+            let magie = Math.floor(Math.random() * Math.floor(100));
+            if (magie <50){
+                Perso.newPV = Perso.PV - Robot.Magie*3 + (Perso.Defense/2);
+            }
+            else{
+            }
+        }
+    }
+    else if (monstre == 7){
+        let randAttaque = Math.floor(Math.random() * Math.floor(3));
+        if (randAttaque == 0 && (- (Wivre.Force/2) + (Perso.Defense/2))<0) {
+            Perso.newPV = Perso.PV - (Wivre.Force/2) + (Perso.Defense/2);
+        }
+        else if (randAttaque == 1 && (- (Wivre.Force*2) + (Perso.Defense/2))<0) {
+            let attaqueforte = Math.floor(Math.random() * Math.floor(100));
+            if (attaqueforte <75){
+                Perso.newPV = Perso.PV - Wivre.Force*2 + (Perso.Defense/2);
+            }
+            else { 
+            }
+        }
+        else if (randAttaque == 2 && (- (Wivre.Magie*3) + (Perso.Defense/2))<0){
+            let magie = Math.floor(Math.random() * Math.floor(100));
+            if (magie <50){
+                Perso.newPV = Perso.PV - Wivre.Magie*3 + (Perso.Defense/2);
+            }
+            else{
+            }
+        }
+    }
+    else if (monstre == 8){
+        let randAttaque = Math.floor(Math.random() * Math.floor(3));
+        if (randAttaque == 0 && (- (Ange.Force/2) + (Perso.Defense/2))<0) {
+            Perso.newPV = Perso.PV - (Ange.Force/2) + (Perso.Defense/2);
+        }
+        else if (randAttaque == 1 && (- (Ange.Force*2) + (Perso.Defense/2))<0) {
+            let attaqueforte = Math.floor(Math.random() * Math.floor(100));
+            if (attaqueforte <75){
+                Perso.newPV = Perso.PV - Ange.Force*2 + (Perso.Defense/2);
+            }
+            else { 
+            }
+        }
+        else if (randAttaque == 2 && (- (Ange.Magie*3) + (Perso.Defense/2))<0){
+            let magie = Math.floor(Math.random() * Math.floor(100));
+            if (magie <50){
+                Perso.newPV = Perso.PV - Ange.Magie*3 + (Perso.Defense/2);
+            }
+            else{
+            }
+        }
+    }
+    else if (monstre == 9){
+        let randAttaque = Math.floor(Math.random() * Math.floor(3));
+        if (randAttaque == 0 && (- (Demon.Force/2) + (Perso.Defense/2))<0) {
+            Perso.newPV = Perso.PV - (Demon.Force/2) + (Perso.Defense/2);
+        }
+        else if (randAttaque == 1 && (- (Demon.Force*2) + (Perso.Defense/2))<0) {
+            let attaqueforte = Math.floor(Math.random() * Math.floor(100));
+            if (attaqueforte <75){
+                Perso.newPV = Perso.PV - Demon.Force*2 + (Perso.Defense/2);
+            }
+            else { 
+            }
+        }
+        else if (randAttaque == 2 && (- (Demon.Magie*3) + (Perso.Defense/2))<0){
+            let magie = Math.floor(Math.random() * Math.floor(100));
+            if (magie <50){
+                Perso.newPV = Perso.PV - Demon.Magie*3 + (Perso.Defense/2);
             }
             else{
             }
         }
     }
 }
-
 function faible() {
     if (monstre == 1){    
-        Fantome.newPV = Fantome.PV-(Perso.Force/2)+(Fantome.Defense/8);
+        if ((-(Perso.Force/2)+(Fantome.Defense/2))<0){
+            Fantome.newPV = Fantome.PV-(Perso.Force/2)+(Fantome.Defense/2);
+        }
         attaqueMob();
         document.getElementById('texte').innerHTML = Fantome.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
         if (Perso.PV <= 0){
@@ -200,8 +343,10 @@ function faible() {
             retour();
         }
     }
-    else if (monstre == 2){    
-        Slime.newPV = Slime.PV-Perso.Force+(Slime.Defense/8);
+    else if (monstre == 2){   
+        if ((-(Perso.Force/2)+(Slime.Defense/2))<0){ 
+            Slime.newPV = Slime.PV-Perso.Force+(Slime.Defense/2);
+        }
         attaqueMob();
         document.getElementById('texte').innerHTML = Slime.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
         if (Perso.PV <= 0){
@@ -215,8 +360,380 @@ function faible() {
             retour();
         }
     }
-    else if (monstre == 3){    
-        Rat.newPV = Rat.PV-Perso.Force+(Rat.Defense/8);
+    else if (monstre == 3){   
+        if ((-(Perso.Force/2)+(Rat.Defense/2))<0){ 
+            Rat.newPV = Rat.PV-Perso.Force+(Rat.Defense/2);
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Rat.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Rat.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Rat.XP;
+            leveling();
+            retour();
+        }
+    }
+    else if (monstre == 4){  
+        if ((-(Perso.Force/2)+(Loup.Defense/2))<0){  
+            Loup.newPV = Loup.PV-Perso.Force+(Loup.Defense/2);
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Loup.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Loup.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Loup.XP;
+            leveling();
+            retour();
+        }
+    }
+    else if (monstre == 5){ 
+        if ((-(Perso.Force/2)+(Orc.Defense/2))<0){   
+            Orc.newPV = Orc.PV-Perso.Force+(Orc.Defense/2);
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Orc.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Orc.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Orc.XP;
+            leveling();
+            retour();
+        }
+    }
+    else if (monstre == 6){ 
+        if ((-(Perso.Force/2)+(Robot.Defense/2))<0){   
+            Robot.newPV = Robot.PV-Perso.Force+(Robot.Defense/2);
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Robot.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Robot.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Robot.XP;
+            leveling();
+            retour();
+        }
+    }
+    else if (monstre == 7){   
+        if ((-(Perso.Force/2)+(Wivre.Defense/2))<0){ 
+            Wivre.newPV = Wivre.PV-Perso.Force+(Wivre.Defense/2);
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Wivre.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Wivre.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Wivre.XP;
+            leveling();
+            retour();
+        }
+    }
+    else if (monstre == 8){ 
+        if ((-(Perso.Force/2)+(Ange.Defense/2))<0){   
+            Ange.newPV = Ange.PV-Perso.Force+(Ange.Defense/2);
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Ange.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Ange.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Ange.XP;
+            leveling();
+            retour();
+        }
+    }
+    else if (monstre == 9){    
+        if ((-(Perso.Force/2)+(Demon.Defense/2))<0){
+            Demon.newPV = Demon.PV-Perso.Force+(Demon.Defense/2);
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Demon.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Demon.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Demon.XP;
+            leveling();
+            retour();
+        }
+    }
+}
+function forte() {
+    if (monstre == 1){  
+        if ((-(Perso.Force)+(Fantome.Defense/2))<0){  
+            let attaqueforteP = Math.floor(Math.random() * Math.floor(100));
+            if (attaqueforteP <75){
+                Fantome.newPV = Fantome.PV - (Perso.Force*2) + (Fantome.Defense/2);
+            }
+            else { 
+            }
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Fantome.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Fantome.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Fantome.XP;
+            leveling();
+            retour();
+        }
+    }
+    else if (monstre == 2){  
+        if ((-(Perso.Force*2)+(Slime.Defense/2))<0){   
+            let attaqueforteP = Math.floor(Math.random() * Math.floor(100));
+            if (attaqueforteP <75){
+                Slime.newPV = Slime.PV - (Perso.Force*2) + (Slime.Defense/2);
+            }
+            else { 
+            }
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Slime.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Slime.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Slime.XP;
+            leveling();
+            retour();
+        }
+    }
+    else if (monstre == 3){ 
+        if ((-(Perso.Force*2)+(Rat.Defense/2))<0){    
+            let attaqueforteP = Math.floor(Math.random() * Math.floor(100));
+            if (attaqueforteP <75){
+                Rat.newPV = Rat.PV - (Perso.Force*2) + (Rat.Defense/2);
+            }
+            else { 
+            }
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Rat.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Rat.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Rat.XP;
+            leveling();
+            retour();
+        }
+    }
+    else if (monstre == 4){  
+        if ((-(Perso.Force*2)+(Loup.Defense/2))<0){  
+            let attaqueforteP = Math.floor(Math.random() * Math.floor(100));
+            if (attaqueforteP <75){
+                Loup.newPV = Loup.PV - (Perso.Force*2) + (Loup.Defense/2);
+            }
+            else { 
+            }
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Loup.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Loup.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Loup.XP;
+            leveling();
+            retour();
+        }
+    }
+    else if (monstre == 5){  
+        if ((-(Perso.Force*2)+(Orc.Defense/2))<0){  
+            let attaqueforteP = Math.floor(Math.random() * Math.floor(100));
+            if (attaqueforteP <75){
+                Orc.newPV = Orc.PV - (Perso.Force*2) + (Orc.Defense/2);
+            }
+            else { 
+            }
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Orc.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Orc.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Orc.XP;
+            leveling();
+            retour();
+        }
+    }
+    else if (monstre == 6){ 
+        if ((-(Perso.Force*2)+(Robot.Defense/2))<0){   
+            let attaqueforteP = Math.floor(Math.random() * Math.floor(100));
+            if (attaqueforteP <75){
+                Robot.newPV = Robot.PV - (Perso.Force*2) + (Robot.Defense/2);
+            }
+            else { 
+            }
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Robot.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Robot.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Robot.XP;
+            leveling();
+            retour();
+        }
+    }
+    else if (monstre == 7){ 
+        if ((-(Perso.Force*2)+(Wivre.Defense/2))<0){   
+            let attaqueforteP = Math.floor(Math.random() * Math.floor(100));
+            if (attaqueforteP <75){
+                Wivre.newPV = Wivre.PV - (Perso.Force*2) + (Wivre.Defense/2);
+            }
+            else { 
+            }
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Wivre.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Wivre.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Wivre.XP;
+            leveling();
+            retour();
+        }
+    }
+    else if (monstre == 8){
+        if ((-(Perso.Force*2)+(Ange.Defense/2))<0){    
+            let attaqueforteP = Math.floor(Math.random() * Math.floor(100));
+            if (attaqueforteP <75){
+                Ange.newPV = Ange.PV - (Perso.Force*2) + (Ange.Defense/2);
+            }
+            else { 
+            }
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Ange.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Ange.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Ange.XP;
+            leveling();
+            retour();
+        }
+    }
+    else if (monstre == 9){   
+        if ((-(Perso.Force*2)+(Demon.Defense/2))<0){ 
+            let attaqueforteP = Math.floor(Math.random() * Math.floor(100));
+            if (attaqueforteP <75){
+                Demon.newPV = Demon.PV - (Perso.Force*2) + (Demon.Defense/2);
+            }
+            else { 
+            }
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Demon.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Demon.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Demon.XP;
+            leveling();
+            retour();
+        }
+    }
+}
+function magie() {
+    if (monstre == 1){  
+        if ((-(Perso.Magie*3)+(Fantome.Defense/2))<0){  
+            let magieP = Math.floor(Math.random() * Math.floor(100));
+            if (magieP <50){
+                Fantome.newPV = Fantome.PV - Perso.Magie*3 + (Fantome.Defense/2);
+            }
+            else{
+            }
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Fantome.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Fantome.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Fantome.XP;
+            leveling();
+            retour();
+        }
+    }
+    else if (monstre == 2){ 
+        if ((-(Perso.Magie*3)+(Slime.Defense/2))<0){   
+            let magieP = Math.floor(Math.random() * Math.floor(100));
+            if (magieP <50){
+                Slime.newPV = Slime.PV - Perso.Magie*3 + (Slime.Defense/2);
+            }
+            else{
+            }
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Slime.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Slime.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Slime.XP;
+            leveling();
+            retour();
+        }
+    }
+    else if (monstre == 3){   
+        if ((-(Perso.Magie*3)+(Rat.Defense/2))<0){ 
+            let magieP = Math.floor(Math.random() * Math.floor(100));
+            if (magieP <50){
+                Rat.newPV = Rat.PV - Perso.Magie*3 + (Rat.Defense/2);
+            }
+            else{
+            }
+        }
         attaqueMob();
         document.getElementById('texte').innerHTML = Rat.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
         if (Perso.PV <= 0){
@@ -231,84 +748,138 @@ function faible() {
         }
     }
     else if (monstre == 4){    
-        alert("Attaque faible 4");
+        if ((-(Perso.Magie*3)+(Loup.Defense/2))<0){ 
+            let magieP = Math.floor(Math.random() * Math.floor(100));
+            if (magieP <50){
+                Loup.newPV = Loup.PV - Perso.Magie*3 + (Loup.Defense/2);
+            }
+            else{
+            }
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Loup.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Loup.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Loup.XP;
+            leveling();
+            retour();
+        }
     }
-    else if (monstre == 5){    
-        alert("Attaque faible 5");
+    else if (monstre == 5){ 
+        if ((-(Perso.Magie*3)+(Orc.Defense/2))<0){    
+            let magieP = Math.floor(Math.random() * Math.floor(100));
+            if (magieP <50){
+                Orc.newPV = Orc.PV - Perso.Magie*3 + (Orc.Defense/2);
+            }
+            else{
+            }
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Orc.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Orc.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Orc.XP;
+            leveling();
+            retour();
+        }
     }
-    else if (monstre == 6){    
-        alert("Attaque faible 6");
+    else if (monstre == 6){ 
+        if ((-(Perso.Magie*3)+(Robot.Defense/2))<0){    
+            let magieP = Math.floor(Math.random() * Math.floor(100));
+            if (magieP <50){
+                Robot.newPV = Robot.PV - Perso.Magie*3 + (Robot.Defense/2);
+            }
+            else{
+            }
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Robot.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Robot.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Robot.XP;
+            leveling();
+            retour();
+        }
     }
-    else if (monstre == 7){    
-        alert("Attaque faible 7");
+    else if (monstre == 7){  
+        if ((-(Perso.Magie*3)+(Wivre.Defense/2))<0){   
+            let magieP = Math.floor(Math.random() * Math.floor(100));
+            if (magieP <50){
+                Wivre.newPV = Wivre.PV - Perso.Magie*3 + (Wivre.Defense/2);
+            }
+            else{
+            }
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Wivre.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Wivre.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Wivre.XP;
+            leveling();
+            retour();
+        }
     }
-    else if (monstre == 8){    
-        alert("Attaque faible 8");
+    else if (monstre == 8){
+        if ((-(Perso.Magie*3)+(Ange.Defense/2))<0){     
+            let magieP = Math.floor(Math.random() * Math.floor(100));
+            if (magieP <50){
+                Ange.newPV = Ange.PV - Perso.Magie*3 + (Ange.Defense/2);
+            }
+            else{
+            }
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Ange.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Ange.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Ange.XP;
+            leveling();
+            retour();
+        }
     }
     else if (monstre == 9){    
-        alert("Attaque faible 9");
+        if ((-(Perso.Magie*3)+(Demon.Defense/2))<0){ 
+            let magieP = Math.floor(Math.random() * Math.floor(100));
+            if (magieP <50){
+                Demon.newPV = Demon.PV - Perso.Magie*3 + (Demon.Defense/2);
+            }
+            else{
+            }
+        }
+        attaqueMob();
+        document.getElementById('texte').innerHTML = Demon.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+        if (Perso.PV <= 0){
+            alert("Vous avez perdu le combat");
+            retour()
+        }
+        if (Demon.PV <= 0){
+            alert("Bravo, vous avez gagné le combat");
+            Perso.newXP = Perso.XP + Demon.XP;
+            leveling();
+            retour();
+        }
     }
 }
-function forte() {
-    if (monstre == 1){    
-        alert("Attaque forte 1");
-    }
-    else if (monstre == 2){    
-        alert("Attaque forte 2");
-    }
-    else if (monstre == 3){    
-        alert("Attaque forte 3");
-    }
-    else if (monstre == 4){    
-        alert("Attaque forte 4");
-    }
-    else if (monstre == 5){    
-        alert("Attaque forte 5");
-    }
-    else if (monstre == 6){    
-        alert("Attaque forte 6");
-    }
-    else if (monstre == 7){    
-        alert("Attaque forte 7");
-    }
-    else if (monstre == 8){    
-        alert("Attaque forte 8");
-    }
-    else if (monstre == 9){    
-        alert("Attaque forte 9");
-    }
-}
-
-function magie() {
-    if (monstre == 1){    
-        alert("Magie 1");
-    }
-    else if (monstre == 2){    
-        alert("Magie 2");
-    }
-    else if (monstre == 3){    
-        alert("Magie 3");
-    }
-    else if (monstre == 4){    
-        alert("Magie 4");
-    }
-    else if (monstre == 5){    
-        alert("Magie 5");
-    }
-    else if (monstre == 6){    
-        alert("Magie 6");
-    }
-    else if (monstre == 7){    
-        alert("Magie 7");
-    }
-    else if (monstre == 8){    
-        alert("Magie 8");
-    }
-    else if (monstre == 9){    
-        alert("Magie 9");
-    }
-}
-
 function fuite() {
     let reussite = Math.floor(Math.random() * Math.floor(100));
     if (reussite < 65){ 
@@ -317,16 +888,68 @@ function fuite() {
     else {
         alert('Fuite impossible');
         attaqueMob();
-        document.getElementById('texte').innerHTML = Slime.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
-        if (Perso.PV <= 0){
-            alert("Vous avez perdu le combat");
-            retour()
+        if (monstre == 1){
+            document.getElementById('texte').innerHTML = Fantome.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+            if (Perso.PV <= 0){
+                alert("Vous avez perdu le combat");
+                retour()
+            }
         }
-        if (Slime.PV <= 0){
-            alert("Bravo, vous avez gagné le combat");
-            Perso.newXP = Perso.XP + Slime.XP;
-            leveling();
-            retour();
+        else if (monstre == 2){
+            document.getElementById('texte').innerHTML = Slime.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+            if (Perso.PV <= 0){
+                alert("Vous avez perdu le combat");
+                retour()
+            }
+        }
+        else if (monstre == 3){
+            document.getElementById('texte').innerHTML = Rat.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+            if (Perso.PV <= 0){
+                alert("Vous avez perdu le combat");
+                retour()
+            }
+        }
+        else if (monstre == 4){
+            document.getElementById('texte').innerHTML = Loup.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+            if (Perso.PV <= 0){
+                alert("Vous avez perdu le combat");
+                retour()
+            }
+        }
+        else if (monstre == 5){
+            document.getElementById('texte').innerHTML = Orc.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+            if (Perso.PV <= 0){
+                alert("Vous avez perdu le combat");
+                retour()
+            }
+        }
+        else if (monstre == 6){
+            document.getElementById('texte').innerHTML = Robot.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+            if (Perso.PV <= 0){
+                alert("Vous avez perdu le combat");
+                retour()
+            }
+        }
+        else if (monstre == 7){
+            document.getElementById('texte').innerHTML = Wivre.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+            if (Perso.PV <= 0){
+                alert("Vous avez perdu le combat");
+                retour()
+            }
+        }
+        else if (monstre == 8){
+            document.getElementById('texte').innerHTML = Ange.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+            if (Perso.PV <= 0){
+                alert("Vous avez perdu le combat");
+                retour()
+            }
+        }
+        else if (monstre == 9){
+            document.getElementById('texte').innerHTML = Demon.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
+            if (Perso.PV <= 0){
+                alert("Vous avez perdu le combat");
+                retour()
+            }
         }
     }
 }
@@ -337,10 +960,10 @@ function leveling(){
             alert("Vous êtes monté de niveau Guerrier\rAugmentation de : ")
         }
         else if (Perso.Classe == "Mage"){
-            alert("Vous êtes monté de niveau Mage<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Mage\rAugmentation de : ")
         }
         else if (Perso.Classe == "Voleur"){
-            alert("Vous êtes monté de niveau Voleur<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Voleur\rAugmentation de : ")
         }
         else if (Perso.Classe == ""){
             alert("Vous êtes monté de niveau\rAugmentation de : ")
@@ -348,134 +971,125 @@ function leveling(){
     }
     if (Perso.Niveau == 2 && Perso.XP>30){
         Perso.newNiveau = 3;
-        alert("Vous êtes monté de niveau<br>Augmentation de : ")
         if (Perso.Classe == "Guerrier"){
-            alert("Vous êtes monté de niveau Guerrier<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Guerrier\rAugmentation de : ")
         }
         else if (Perso.Classe == "Mage"){
-            alert("Vous êtes monté de niveau Mage<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Mage\rAugmentation de : ")
         }
         else if (Perso.Classe == "Voleur"){
-            alert("Vous êtes monté de niveau Voleur<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Voleur\rAugmentation de : ")
         }
         else if (Perso.Classe == ""){
-            alert("Vous êtes monté de niveau<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau\rAugmentation de : ")
         }
     }
     if (Perso.Niveau == 3 && Perso.XP>45){
         Perso.newNiveau = 4;
-        alert("Vous êtes monté de niveau<br>Augmentation de : ")
         if (Perso.Classe == "Guerrier"){
-            alert("Vous êtes monté de niveau Guerrier<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Guerrier\rAugmentation de : ")
         }
         else if (Perso.Classe == "Mage"){
-            alert("Vous êtes monté de niveau Mage<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Mage\rAugmentation de : ")
         }
         else if (Perso.Classe == "Voleur"){
-            alert("Vous êtes monté de niveau Voleur<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Voleur\rAugmentation de : ")
         }
         else if (Perso.Classe == ""){
-            alert("Vous êtes monté de niveau<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau\rAugmentation de : ")
         }
     }
     if (Perso.Niveau == 4 && Perso.XP>75){
         Perso.newNiveau = 5;
-        alert("Vous êtes monté de niveau<br>Augmentation de : ")
         if (Perso.Classe == "Guerrier"){
-            alert("Vous êtes monté de niveau Guerrier<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Guerrier\rAugmentation de : ")
         }
         else if (Perso.Classe == "Mage"){
-            alert("Vous êtes monté de niveau Mage<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Mage\rAugmentation de : ")
         }
         else if (Perso.Classe == "Voleur"){
-            alert("Vous êtes monté de niveau Voleur<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Voleur\rAugmentation de : ")
         }
         else if (Perso.Classe == ""){
-            alert("Vous êtes monté de niveau<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau\rAugmentation de : ")
         }
     }
     if (Perso.Niveau == 5 && Perso.XP>105){
         Perso.newNiveau = 6;
-        alert("Vous êtes monté de niveau<br>Augmentation de : ")
         if (Perso.Classe == "Guerrier"){
-            alert("Vous êtes monté de niveau Guerrier<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Guerrier\rAugmentation de : ")
         }
         else if (Perso.Classe == "Mage"){
-            alert("Vous êtes monté de niveau Mage<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Mage\rAugmentation de : ")
         }
         else if (Perso.Classe == "Voleur"){
-            alert("Vous êtes monté de niveau Voleur<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Voleur\rAugmentation de : ")
         }
         else if (Perso.Classe == ""){
-            alert("Vous êtes monté de niveau<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau\rAugmentation de : ")
         }
     }
     if (Perso.Niveau == 6 && Perso.XP>135){
         Perso.newNiveau = 7;
-        alert("Vous êtes monté de niveau<br>Augmentation de : ")
         if (Perso.Classe == "Guerrier"){
-            alert("Vous êtes monté de niveau Guerrier<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Guerrier\rAugmentation de : ")
         }
         else if (Perso.Classe == "Mage"){
-            alert("Vous êtes monté de niveau Mage<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Mage\rAugmentation de : ")
         }
         else if (Perso.Classe == "Voleur"){
-            alert("Vous êtes monté de niveau Voleur<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Voleur\rAugmentation de : ")
         }
         else if (Perso.Classe == ""){
-            alert("Vous êtes monté de niveau<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau\rAugmentation de : ")
         }
     }
     if (Perso.Niveau == 7 && Perso.XP>195){
         Perso.newNiveau = 8;
-        alert("Vous êtes monté de niveau<br>Augmentation de : ")
         if (Perso.Classe == "Guerrier"){
-            alert("Vous êtes monté de niveau Guerrier<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Guerrier\rAugmentation de : ")
         }
         else if (Perso.Classe == "Mage"){
-            alert("Vous êtes monté de niveau Mage<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Mage\rAugmentation de : ")
         }
         else if (Perso.Classe == "Voleur"){
-            alert("Vous êtes monté de niveau Voleur<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Voleur\rAugmentation de : ")
         }
         else if (Perso.Classe == ""){
-            alert("Vous êtes monté de niveau<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau\rAugmentation de : ")
         }
     }
     if (Perso.Niveau == 8 && Perso.XP>255){
         Perso.newNiveau = 9;
-        alert("Vous êtes monté de niveau<br>Augmentation de : ")
         if (Perso.Classe == "Guerrier"){
-            alert("Vous êtes monté de niveau Guerrier<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Guerrier\rAugmentation de : ")
         }
         else if (Perso.Classe == "Mage"){
-            alert("Vous êtes monté de niveau Mage<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Mage\rAugmentation de : ")
         }
         else if (Perso.Classe == "Voleur"){
-            alert("Vous êtes monté de niveau Voleur<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Voleur\rAugmentation de : ")
         }
         else if (Perso.Classe == ""){
-            alert("Vous êtes monté de niveau<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau\rAugmentation de : ")
         }
     }
     if (Perso.Niveau == 9 && Perso.XP>315){
         Perso.newNiveau = 10;
-        alert("Vous êtes monté de niveau<br>Augmentation de : ")
         if (Perso.Classe == "Guerrier"){
-            alert("Vous êtes monté de niveau Guerrier<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Guerrier\rAugmentation de : ")
         }
         else if (Perso.Classe == "Mage"){
-            alert("Vous êtes monté de niveau Mage<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Mage\rAugmentation de : ")
         }
         else if (Perso.Classe == "Voleur"){
-            alert("Vous êtes monté de niveau Voleur<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau Voleur\rAugmentation de : ")
         }
         else if (Perso.Classe == ""){
-            alert("Vous êtes monté de niveau<br>Augmentation de : ")
+            alert("Vous êtes monté de niveau\rAugmentation de : ")
         }
     }
 }
-
 function combat() {
     Perso.newPV= Perso.PVMax;
     document.getElementById('choix1').innerHTML = 'Attaque Faible';
@@ -555,27 +1169,14 @@ function retour() {
     document.getElementById('choix4').removeEventListener('click', fuite);
     continuer();   
 }
-
 function chapitres() {
     tes = '<h1>Liste des chapitres</h1><h3>Voie du Guerrier</h3><h3>Voie du Mage</h3><h3>Voie du Voleur</h3><h3>Voie de l\'Inconnu</h3>'
     document.getElementById('texte').innerHTML = tes;
 }
-
-window.addEventListener('keydown', function (e) {
-    if (e.keyCode == 39) {
-        if (page<70){
-            page++;
-            continuer();
-        }
-    }
-    else if (e.keyCode == 37) {
-        if (page>0){
-            page--;
-            continuer();
-        }    
-    }
-  });
-
+function commandes() {
+    tes = '<h1>Liste des commandes</1><h3>Combat</h3><p>Lance un combat aléatoire en fonction de ton niveau</p><h3></h3><h3></h3><h3></h3><p>Entrer \'retour\' pour revenir à l\'histoire.</p>'
+    document.getElementById('texte').innerHTML = tes;
+}
 function continuer(){
     fight = false;
     if(page===0){
@@ -620,7 +1221,7 @@ function commande()
             let classe = document.getElementById('commandes').value;
             Perso.newClasse=classe;
             if (Perso.Classe === 'Guerrier' || Perso.Classe === 'guerrier') {
-                Perso.newClasse = "Guerrier"
+                Perso.newClasse = "Guerrier";
                 Perso.newPvMax = 20;
                 Perso.newPV = 20;
                 Perso.newDefense = 4;
@@ -628,22 +1229,23 @@ function commande()
                 Perso.newMagie = 1;
             }
             else if (Perso.Classe === 'Mage' || Perso.Classe === 'mage') {
-                Perso.newClasse = "Mage"
+                Perso.newClasse = "Mage";
                 Perso.newPvMax = 25;
                 Perso.newPV = 25;
                 Perso.newDefense = 3;
                 Perso.newForce = 2;
-                Perso.newMagie = 3;
+                Perso.newMagie = 4;
             }
             else if (Perso.Classe === 'Voleur' || Perso.Classe === 'voleur') {
-                Perso.newClasse = "Voleur"
+                Perso.newClasse = "Voleur";
                 Perso.newPvMax = 15;
                 Perso.newPV = 15;
                 Perso.newDefense = 3;
                 Perso.newForce = 3;
                 Perso.newMagie = 2;
             }
-            else if (Perso.Classe === '') {
+            else {
+                Perso.newClasse = "";
                 Perso.newPvMax = 10;
                 Perso.newPV = 10;
                 Perso.newDefense = 1;
