@@ -1,2 +1,2 @@
 # JeuTextuel
-Jeu Textuel en Javascript sans boucles
+Jeu Textuel en Javascript 
