@@ -1700,9 +1700,9 @@ function combat() {
             document.getElementById("image").src = Vampire.Image;
         }
         else if (boss == 6){
-            Chevalier.newPV=Vampire.PVMax;
-            document.getElementById('texte').innerHTML = Vampire.combats +'<br><br><br><br><br><br><br><br><br>'+Perso.combats;
-            document.getElementById("image").src = Vampire.Image;
+            Chevalier.newPV=Chevalier.PVMax;
+            document.getElementById('texte').innerHTML = Chevalier.combats +'<br><br><br><br><br><br><br><br><br>'+Chevalier.combats;
+            document.getElementById("image").src = Chevalier.Image;
         }
         else if (boss==7){
             Double.newPV=Double.PVMax;
@@ -2094,7 +2094,7 @@ function continuer(){
                 document.getElementById('texte').innerHTML = tes;
                 document.getElementById("image").src = "img/mort.png";
             }
-            else if (choixv2=="infiltration"){
+            else if (choixv2=="Attaque"){
                 bloccom=true;
                 tes = "<h1>Tu fais quoi ?</h1><p><strong>infiltration</strong> ou <strong>partir</strong> ?</p>";
                 document.getElementById('texte').innerHTML = tes;
@@ -2282,7 +2282,7 @@ function continuer(){
                     bloccom = true;
                     tes ="<h1>Gagné</h1><p><strong>coffre</strong> ou <strong>piller</strong> ?</p>"
                     document.getElementById("texte").innerHTML = tes;
-                    document.getElementById("image").src = "img/bandit.png";
+                    document.getElementById("image").src = "img/Chevalier.png";
                 }
                 else if (mort == true){
                     tes ="<h1>T'es Mort</h1><p>Mort</p>"
@@ -2347,7 +2347,7 @@ function continuer(){
                 Inv.newBagues=true;
                 tes ="<h1>Pillage</h1><p>Un anneau</p>"
                 document.getElementById("texte").innerHTML = tes;
-                document.getElementById("image").src = "img/Bagues.png";
+                document.getElementById("image").src = "img/Bagues.gif";
             }
             else if (choixv4=="Coffre"){
                 victoire=true;
@@ -2557,8 +2557,8 @@ function commande(){
                 if (choix === 'Infiltration' || choix === 'infiltration'){
                     choixv2 = 'Infiltration';
                 } 
-                else if (choix === 'Attaquer' || choix === 'attaquer'){
-                    choixv2 = 'Attaquer';
+                else if (choix === 'Attaque' || choix === 'attaque'){
+                    choixv2 = 'Attaque';
                 } 
                 else {
                     choixv2 = "";
